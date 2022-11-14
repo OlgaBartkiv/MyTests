@@ -1,6 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MyObjects.Pages.Saucedemo
 {
-    public class ProductsPage
+    public class ProductsPage : Page
     {
         IWebDriver webDriver;
 
@@ -17,7 +17,7 @@ namespace MyObjects.Pages.Saucedemo
         public readonly By hlShoppingCart = By.CssSelector("div[id='shopping_cart_container'] a[class*='shopping_cart_link']");
 
 
-        public ProductsPage(IWebDriver webDriver)
+        public ProductsPage(IWebDriver webDriver) : base(webDriver)
         {
             this.webDriver = webDriver;
 
@@ -26,18 +26,30 @@ namespace MyObjects.Pages.Saucedemo
         {
             wait.Until(d => d.FindElement(hlShoppingCart));
         }
+        public override void IsPageProperlyLoaded()
+        {
+            base.IsPageProperlyLoaded();
+            try
+            {
+                FindElement(hlShoppingCart);
+            }
+            catch (NoSuchElementException)
+            {
+                Assert.Fail();
+            }
+        }
         public void AddBackpackToCart()
         {
-           webDriver.FindElement(btnAddBackpack).Click();
+            ClickOnElement(btnAddBackpack);
         }
         public void AddTshirtToCart()
         {
-            webDriver.FindElement(btnAddTshirt).Click();
+            ClickOnElement(btnAddTshirt);
         }
 
         public void GoToCart()
         {
-            webDriver.FindElement(hlShoppingCart).Click();
+            ClickOnElement(hlShoppingCart);
         }
     }
 }

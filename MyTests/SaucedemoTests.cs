@@ -29,22 +29,27 @@ namespace MyTests
         {
             webDriver.Url = "https://www.saucedemo.com/";
             LoginPage loginPage = new LoginPage(webDriver);
-            loginPage.WaitForPageToLoad(wait);
+            //loginPage.WaitForPageToLoad(wait);
+            loginPage.IsPageProperlyLoaded();
             loginPage.Login("standard_user", "secret_sauce");
             ProductsPage productsPage = new ProductsPage(webDriver);
-            productsPage.WaitForPageToLoad(wait);
+            //productsPage.WaitForPageToLoad(wait);
+            productsPage.IsPageProperlyLoaded();
             productsPage.AddBackpackToCart();
             productsPage.GoToCart();
             CartPage cartPage = new CartPage(webDriver);
-            cartPage.WaitForPageToLoad(wait);
+            //cartPage.WaitForPageToLoad(wait);
+            cartPage.IsPageProperlyLoaded();
             cartPage.RemoveBackpackFromCart();
             cartPage.ClickContinue();
             productsPage = new ProductsPage(webDriver);
-            productsPage.WaitForPageToLoad(wait);
+            //productsPage.WaitForPageToLoad(wait);
+            productsPage.IsPageProperlyLoaded();
             productsPage.AddTshirtToCart();
             productsPage.GoToCart();
             cartPage = new CartPage(webDriver);
-            cartPage.WaitForPageToLoad(wait);
+            //cartPage.WaitForPageToLoad(wait);
+            cartPage.IsPageProperlyLoaded();
             cartPage.ClickCheckout();
         }
 
