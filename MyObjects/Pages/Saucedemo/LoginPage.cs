@@ -15,6 +15,7 @@ namespace MyObjects.Pages.Saucedemo
         public readonly By txtUsername = By.XPath("//input[contains(@id,'user-name')]");
         public readonly By txtPassword = By.XPath("//input[contains(@id,'password')]");
         public readonly By btnLogin = By.XPath("//input[contains(@id,'login-button')]");
+        public readonly By lbLogo = By.XPath("//div[contains(@class,'logo')]");
 
         public LoginPage(IWebDriver webDriver) : base(webDriver)
         {
@@ -28,9 +29,9 @@ namespace MyObjects.Pages.Saucedemo
 
         public override void IsPageProperlyLoaded()
         {
-            base.IsPageProperlyLoaded();
             try
             {
+                FindElement(lbLogo);
                 FindElement(btnLogin);
             }
             catch (NoSuchElementException)

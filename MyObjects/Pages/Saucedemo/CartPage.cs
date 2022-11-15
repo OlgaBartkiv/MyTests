@@ -15,6 +15,7 @@ namespace MyObjects.Pages.Saucedemo
         public readonly By btnRemoveBackpack = By.XPath("//button[contains(@id,'remove-sauce-labs-backpack')]");
         public readonly By btnCheckout = By.XPath("//button[contains(@id,'checkout')]");
         public readonly By btnContinue = By.XPath("//button[contains(@id,'continue-shopping')]");
+        public readonly By lbLogo = By.XPath("//div[contains(@class,'logo')]");
 
 
         public CartPage(IWebDriver webDriver) : base(webDriver)
@@ -28,9 +29,9 @@ namespace MyObjects.Pages.Saucedemo
         }
         public override void IsPageProperlyLoaded()
         {
-            base.IsPageProperlyLoaded();
             try
             {
+                FindElement(lbLogo);
                 FindElement(btnCheckout);
             }
             catch (NoSuchElementException)
