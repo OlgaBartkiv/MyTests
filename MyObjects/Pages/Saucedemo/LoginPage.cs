@@ -1,6 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MyObjects.Pages.Saucedemo
 {
-    public class LoginPage
+    public class LoginPage : Page
     {
         IWebDriver webDriver;
 
@@ -16,7 +16,7 @@ namespace MyObjects.Pages.Saucedemo
         public readonly By txtPassword = By.XPath("//input[contains(@id,'password')]");
         public readonly By btnLogin = By.XPath("//input[contains(@id,'login-button')]");
 
-        public LoginPage(IWebDriver webDriver)
+        public LoginPage(IWebDriver webDriver) : base(webDriver)
         {
             this.webDriver = webDriver;
        
@@ -26,23 +26,36 @@ namespace MyObjects.Pages.Saucedemo
             wait.Until(d => d.FindElement(btnLogin));
         }
 
+        public override void IsPageProperlyLoaded()
+        {
+            base.IsPageProperlyLoaded();
+            try
+            {
+                FindElement(btnLogin);
+            }
+            catch (NoSuchElementException)
+            {
+                Assert.Fail();
+            }
+        }
+
         public void SetUsername(string username)
         {
-            webDriver.FindElement(txtUsername).SendKeys(username);
+            FillInTextBox(txtUsername, username);
         }
         public void SetPassword(string password)
         {
-            webDriver.FindElement(txtPassword).SendKeys(password);
+            FillInTextBox(txtPassword, password);
         }
         public void ClickLogin()
         {
-            webDriver.FindElement(btnLogin).Click();
+            ClickOnElement(btnLogin);
         }
         public void Login(string username, string password)
         {
-            webDriver.FindElement(txtUsername).SendKeys(username);
-            webDriver.FindElement(txtPassword).SendKeys(password);
-            webDriver.FindElement(btnLogin).Click();
+            FillInTextBox(txtUsername, username);
+            FillInTextBox(txtPassword, password);
+            ClickOnElement(btnLogin);
         }
 
     }
