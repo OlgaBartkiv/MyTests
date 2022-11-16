@@ -3,11 +3,9 @@ using OpenQA.Selenium;
 
 namespace MyObjects.Pages
 {
-    public class Page
+    public abstract class Page
     {
         IWebDriver webDriver;
-
-        public readonly By lbLogo = By.XPath("//div[contains(@class,'logo')]");
 
 
         public Page(IWebDriver webDriver)
@@ -16,17 +14,7 @@ namespace MyObjects.Pages
 
         }
 
-        public virtual void IsPageProperlyLoaded()
-        {
-            try
-            {
-                FindElement(lbLogo);
-            }
-            catch (NoSuchElementException)
-            {
-                Assert.Fail();
-            }
-        }
+        public abstract void IsPageProperlyLoaded();
 
         public IWebElement FindElement(By locator)
         {
