@@ -1,4 +1,5 @@
-﻿using MyObjects.Pages.Saucedemo;
+﻿using MyObjects.Helpers;
+using MyObjects.Pages.Saucedemo;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -27,7 +28,7 @@ namespace MyTests
         [Test]
         public void AddItemToCart()
         {
-            webDriver.Url = "https://www.saucedemo.com/";
+            webDriver.Url = Url.saucedemoUrl;
             LoginPage loginPage = new LoginPage(webDriver);
             //loginPage.WaitForPageToLoad(wait);
             loginPage.IsPageProperlyLoaded();

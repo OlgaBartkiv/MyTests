@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using MyObjects.Helpers;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System.Collections.Generic;
@@ -10,6 +11,8 @@ namespace MyObjects.Pages.Saucedemo
 {
     public class LoginPage : Page
     {
+        public static readonly string PageUrl = Url.saucedemoUrl;
+
         IWebDriver webDriver;
 
         public readonly By txtUsername = By.XPath("//input[contains(@id,'user-name')]");

@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using MyObjects.Helpers;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System.Collections.Generic;
@@ -10,6 +11,8 @@ namespace MyObjects.Pages.Saucedemo
 {
     public class ProductsPage : Page
     {
+        public static readonly string PageUrl = Url.saucedemoUrl + "inventory.html";
+
         IWebDriver webDriver;
 
         public readonly By btnAddBackpack = By.XPath("//button[contains(@id,'add-to-cart-sauce-labs-backpack')]");
