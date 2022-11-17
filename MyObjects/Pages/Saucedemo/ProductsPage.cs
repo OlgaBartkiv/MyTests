@@ -13,12 +13,10 @@ namespace MyObjects.Pages.Saucedemo
     {
         public static readonly string PageUrl = Url.saucedemoUrl + "inventory.html";
 
-        IWebDriver webDriver;
-
-        public readonly By btnAddBackpack = By.XPath("//button[contains(@id,'add-to-cart-sauce-labs-backpack')]");
-        public readonly By btnAddTshirt = By.XPath("//button[contains(@id,'add-to-cart-sauce-labs-bolt-t-shirt')]");
-        public readonly By hlShoppingCart = By.CssSelector("div[id='shopping_cart_container'] a[class*='shopping_cart_link']");
-        public readonly By lbLogo = By.XPath("//div[contains(@class,'logo')]");
+        private readonly By btnAddBackpack = By.XPath("//button[contains(@id,'add-to-cart-sauce-labs-backpack')]");
+        private readonly By btnAddTshirt = By.XPath("//button[contains(@id,'add-to-cart-sauce-labs-bolt-t-shirt')]");
+        private readonly By hlShoppingCart = By.CssSelector("div[id='shopping_cart_container'] a[class*='shopping_cart_link']");
+        private readonly By lbLogo = By.XPath("//div[contains(@class,'logo')]");
 
 
         public ProductsPage(IWebDriver webDriver) : base(webDriver)

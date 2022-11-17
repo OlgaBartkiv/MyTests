@@ -14,7 +14,7 @@ namespace MyTests
 {
     public class SaucedemoTests
     {
-        IWebDriver webDriver;
+        protected IWebDriver webDriver;
         WebDriverWait wait;
 
         [OneTimeSetUp]
