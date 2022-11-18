@@ -22,6 +22,7 @@ namespace MyObjects.Pages.Saucedemo
         public CartPage(IWebDriver webDriver) : base(webDriver)
         {
             this.webDriver = webDriver;
+            Logger.Info($"Opening 'Cart' page: {PageUrl}");
 
         }
         public void WaitForPageToLoad(WebDriverWait wait)
@@ -43,6 +44,7 @@ namespace MyObjects.Pages.Saucedemo
         public void RemoveBackpackFromCart()
         {
             ClickOnElement(btnRemoveBackpack);
+            Logger.Info("Backpack is removed from cart");
         }
         public void ClickContinue()
         {

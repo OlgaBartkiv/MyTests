@@ -22,6 +22,7 @@ namespace MyObjects.Pages.Saucedemo
         public ProductsPage(IWebDriver webDriver) : base(webDriver)
         {
             this.webDriver = webDriver;
+            Logger.Info($"Opening 'Products' page: {PageUrl}");
 
         }
         public void WaitForPageToLoad(WebDriverWait wait)
@@ -43,10 +44,12 @@ namespace MyObjects.Pages.Saucedemo
         public void AddBackpackToCart()
         {
             ClickOnElement(btnAddBackpack);
+            Logger.Info("Backpack is added to cart");
         }
         public void AddTshirtToCart()
         {
             ClickOnElement(btnAddTshirt);
+            Logger.Info("Tshirt is added to cart");
         }
 
         public void GoToCart()
