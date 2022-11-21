@@ -19,9 +19,9 @@ namespace MyObjects.Pages.Saucedemo
         private readonly By lbLogo = By.XPath("//div[contains(@class,'logo')]");
 
 
-        public CartPage(IWebDriver webDriver) : base(webDriver)
+        public CartPage(MyWebDriver myWebDriver) : base(myWebDriver)
         {
-            this.webDriver = webDriver;
+            this.myWebDriver = myWebDriver;
             Logger.Info($"Opening 'Cart' page: {PageUrl}");
 
         }
@@ -33,8 +33,9 @@ namespace MyObjects.Pages.Saucedemo
         {
             try
             {
-                FindElement(lbLogo);
-                FindElement(btnCheckout);
+                myWebDriver.FindElement(lbLogo);
+                myWebDriver.FindElement(btnCheckout);
+                myWebDriver.LogScreenshot("Items in the cart currently...");
             }
             catch (NoSuchElementException)
             {
@@ -43,16 +44,17 @@ namespace MyObjects.Pages.Saucedemo
         }
         public void RemoveBackpackFromCart()
         {
-            ClickOnElement(btnRemoveBackpack);
+            myWebDriver.ClickOnElement(btnRemoveBackpack);
             Logger.Info("Backpack is removed from cart");
+            myWebDriver.LogScreenshot("Backpack removed from cart");
         }
         public void ClickContinue()
         {
-            ClickOnElement(btnContinue);
+            myWebDriver.ClickOnElement(btnContinue);
         }
         public void ClickCheckout()
         {
-            ClickOnElement(btnCheckout);
+            myWebDriver.ClickOnElement(btnCheckout);
         }
     }
 }
