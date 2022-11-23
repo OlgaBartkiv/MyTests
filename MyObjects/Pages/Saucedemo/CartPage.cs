@@ -24,11 +24,8 @@ namespace MyObjects.Pages.Saucedemo
             this.myWebDriver = myWebDriver;
             Logger.Info($"Opening 'Cart' page: {PageUrl}");
             myWebDriver.AssertUrl(PageUrl);
+            FluentlyWaitForElementToBePresent(btnContinue);
 
-        }
-        public void WaitForPageToLoad(WebDriverWait wait)
-        {
-            wait.Until(d => d.FindElement(btnCheckout));
         }
         public override void IsPageProperlyLoaded()
         {

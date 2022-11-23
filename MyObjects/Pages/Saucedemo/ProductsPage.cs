@@ -19,6 +19,7 @@ namespace MyObjects.Pages.Saucedemo
         private readonly By lbLogo = By.XPath("//div[contains(@class,'logo')]");
         private readonly By btnRemoveBackpack = By.XPath("//button[contains(@id,'remove-sauce-labs-backpack')]");
         private readonly By lbProductItem = By.XPath("//div[@class='inventory_item_name']");
+        private readonly By btnMenu = By.Id("react-burger-menu-btn");
 
 
         public ProductsPage(MyWebDriver myWebDriver) : base(myWebDriver)
@@ -26,11 +27,8 @@ namespace MyObjects.Pages.Saucedemo
             this.myWebDriver = myWebDriver;
             Logger.Info($"Opening 'Products' page: {PageUrl}");
             myWebDriver.AssertUrl(PageUrl);
+            WaitForElementToBeClickable(btnMenu);
 
-        }
-        public void WaitForPageToLoad(WebDriverWait wait)
-        {
-            wait.Until(d => d.FindElement(hlShoppingCart));
         }
         public override void IsPageProperlyLoaded()
         {

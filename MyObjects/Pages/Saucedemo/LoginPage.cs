@@ -23,11 +23,8 @@ namespace MyObjects.Pages.Saucedemo
             this.myWebDriver = myWebDriver;
             Logger.Info($"Opening 'Login' page: {PageUrl}");
             myWebDriver.AssertUrl(PageUrl);
+            FluentlyWaitForElementToBePresent(btnLogin);
 
-        }
-        public void WaitForPageToLoad(WebDriverWait wait)
-        {
-            wait.Until(d => d.FindElement(btnLogin));
         }
 
         public override void IsPageProperlyLoaded()

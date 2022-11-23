@@ -20,28 +20,23 @@ namespace MyTests
         {
             myWebDriver.Url = Url.saucedemoUrl;
             LoginPage loginPage = new LoginPage(myWebDriver);
-            //loginPage.WaitForPageToLoad(wait);
             loginPage.IsPageProperlyLoaded();
             loginPage.Login("standard_user", "secret_sauce");
             ProductsPage productsPage = new ProductsPage(myWebDriver);
-            //productsPage.WaitForPageToLoad(wait);
             myWebDriver.AssertTextPresentOnPage("Products");
             productsPage.IsPageProperlyLoaded();
             productsPage.AddBackpackToCart();
             productsPage.GoToCart();
             CartPage cartPage = new CartPage(myWebDriver);
-            //cartPage.WaitForPageToLoad(wait);
             myWebDriver.AssertTextPresentOnPage("Your Cart");
             cartPage.IsPageProperlyLoaded();
             cartPage.RemoveBackpackFromCart();
             cartPage.ClickContinue();
             productsPage = new ProductsPage(myWebDriver);
-            //productsPage.WaitForPageToLoad(wait);
             productsPage.IsPageProperlyLoaded();
             productsPage.AddTshirtToCart();
             productsPage.GoToCart();
             cartPage = new CartPage(myWebDriver);
-            //cartPage.WaitForPageToLoad(wait);
             cartPage.IsPageProperlyLoaded();
             cartPage.ClickCheckout();
             
