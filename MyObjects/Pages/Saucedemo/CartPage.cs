@@ -23,6 +23,7 @@ namespace MyObjects.Pages.Saucedemo
         {
             this.myWebDriver = myWebDriver;
             Logger.Info($"Opening 'Cart' page: {PageUrl}");
+            myWebDriver.AssertUrl(PageUrl);
 
         }
         public void WaitForPageToLoad(WebDriverWait wait)
@@ -44,6 +45,7 @@ namespace MyObjects.Pages.Saucedemo
         }
         public void RemoveBackpackFromCart()
         {
+            myWebDriver.AssertElementPresentOnPage(btnRemoveBackpack);  
             myWebDriver.ClickOnElement(btnRemoveBackpack);
             Logger.Info("Backpack is removed from cart");
             myWebDriver.LogScreenshot("Backpack removed from cart");

@@ -29,7 +29,7 @@ namespace MyTests.Tests
                 {
                     var testDirectory = TestContext.CurrentContext.TestDirectory;
                     myWebDriver = new MyWebDriver(new ChromeDriver(testDirectory + @"\chromedriver.exe"));
-                    myWebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+                    myWebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(100);
                     myWebDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(10);
                     Logger.Info("Started chrome browser");
                     myWebDriver.Manage().Window.Maximize();

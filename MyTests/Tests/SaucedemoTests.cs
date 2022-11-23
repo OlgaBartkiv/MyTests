@@ -25,11 +25,13 @@ namespace MyTests
             loginPage.Login("standard_user", "secret_sauce");
             ProductsPage productsPage = new ProductsPage(myWebDriver);
             //productsPage.WaitForPageToLoad(wait);
+            myWebDriver.AssertTextPresentOnPage("Products");
             productsPage.IsPageProperlyLoaded();
             productsPage.AddBackpackToCart();
             productsPage.GoToCart();
             CartPage cartPage = new CartPage(myWebDriver);
             //cartPage.WaitForPageToLoad(wait);
+            myWebDriver.AssertTextPresentOnPage("Your Cart");
             cartPage.IsPageProperlyLoaded();
             cartPage.RemoveBackpackFromCart();
             cartPage.ClickContinue();
@@ -43,6 +45,16 @@ namespace MyTests
             cartPage.IsPageProperlyLoaded();
             cartPage.ClickCheckout();
             
+        }
+
+        [Test]
+        public void FailedLoginInvalidPassword()
+        {
+            myWebDriver.Url = Url.saucedemoUrl;
+            LoginPage loginPage = new LoginPage(myWebDriver);
+            loginPage.IsPageProperlyLoaded();
+            loginPage.Login("standard_user", "secretsauce");
+            ProductsPage productsPage = new ProductsPage(myWebDriver);
         }
     }
 }

@@ -43,5 +43,6 @@ namespace MyObjects.Helpers
             WriteLog(LogSeverity.Error, log);
 
         }
+
     }
 }
