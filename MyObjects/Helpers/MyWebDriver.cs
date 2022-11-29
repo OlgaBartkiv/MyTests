@@ -99,10 +99,9 @@ namespace MyObjects.Helpers
         {
             string fileName = "snapshot" + "_" + DateTime.Now.ToString("dd_MMMM_hh_mm_ss_tt") + ".png";
 
-
             ITakesScreenshot screenshotHandler = webDriver as ITakesScreenshot;
             Screenshot screenshot = screenshotHandler.GetScreenshot();
-            screenshot.SaveAsFile(@"C:\Users\obartkiv\source\MyTests\MyObjects\bin\Debug\Logs" + fileName, ScreenshotImageFormat.Png);
+            screenshot.SaveAsFile(TestContext.CurrentContext.TestDirectory + @"\Logs\" + fileName, ScreenshotImageFormat.Png);
 
             if (status == TestStatus.Passed)
             {
