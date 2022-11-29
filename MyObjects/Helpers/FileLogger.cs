@@ -25,7 +25,6 @@ namespace MyObjects.Helpers
 
         private FileLogger()
         {
-            GetConfigSettings();
 
             _fileName = string.IsNullOrEmpty(Environment.MachineName) ?
                 "LogFile.log" : Environment.MachineName + ".log";
@@ -54,26 +53,6 @@ namespace MyObjects.Helpers
             return _instance;
         }
 
-        private void GetConfigSettings()
-        {
-            string appSetting = ConfigurationManager.AppSettings["FileLogger_Path"];
-            if (!string.IsNullOrEmpty(appSetting))
-            {
-                _path = appSetting;
-            }
-            appSetting = ConfigurationManager.AppSettings["FileLogger_DefaultSeverity"];
-            if (!string.IsNullOrEmpty(appSetting))
-            {
-                try
-                {
-                    _defaultSeverity = (LogSeverity)Enum.Parse(typeof(LogSeverity), appSetting);
-                }
-                catch (Exception ex)
-                {
-                    WriteToEventLog(ex.Message);
-                }
-            }
-        }
 
         public void Dispose()
         {

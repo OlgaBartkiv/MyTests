@@ -25,7 +25,6 @@ namespace MyObjects.Pages.Saucedemo
         public ProductsPage(MyWebDriver myWebDriver) : base(myWebDriver)
         {
             this.myWebDriver = myWebDriver;
-            Logger.Info($"Opening 'Products' page: {PageUrl}");
             myWebDriver.AssertUrl(PageUrl);
             WaitForElementToBeClickable(btnMenu);
 
