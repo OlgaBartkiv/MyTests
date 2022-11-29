@@ -21,6 +21,7 @@ namespace MyObjects.Pages.Saucedemo
         public LoginPage(MyWebDriver myWebDriver) : base(myWebDriver)
         {
             this.myWebDriver = myWebDriver;
+            Logger.Info($"Opening 'Login' page: {PageUrl}");
             myWebDriver.AssertUrl(PageUrl);
             FluentlyWaitForElementToBePresent(btnLogin);
 

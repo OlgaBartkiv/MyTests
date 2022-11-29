@@ -22,6 +22,7 @@ namespace MyObjects.Pages.Saucedemo
         public CartPage(MyWebDriver myWebDriver) : base(myWebDriver)
         {
             this.myWebDriver = myWebDriver;
+            Logger.Info($"Opening 'Cart' page: {PageUrl}");
             myWebDriver.AssertUrl(PageUrl);
             FluentlyWaitForElementToBePresent(btnContinue);
 
