@@ -22,7 +22,6 @@ namespace MyObjects.Pages.Saucedemo
         public ProductsPage(IWebDriver webDriver) : base(webDriver)
         {
             this.webDriver = webDriver;
-            Logger.Info($"Opening 'Products' page: {PageUrl}");
 
         }
         public void WaitForPageToLoad(WebDriverWait wait)

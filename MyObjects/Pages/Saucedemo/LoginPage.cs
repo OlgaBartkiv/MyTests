@@ -21,7 +21,6 @@ namespace MyObjects.Pages.Saucedemo
         public LoginPage(IWebDriver webDriver) : base(webDriver)
         {
             this.webDriver = webDriver;
-            Logger.Info($"Opening 'Login' page: {PageUrl}");
 
         }
         public void WaitForPageToLoad(WebDriverWait wait)
