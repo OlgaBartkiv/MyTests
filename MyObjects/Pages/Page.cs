@@ -1,36 +1,22 @@
-﻿using NUnit.Framework;
+﻿using MyObjects.Helpers;
+using NUnit.Framework;
 using OpenQA.Selenium;
 
 namespace MyObjects.Pages
 {
     public abstract class Page
     {
-        protected IWebDriver webDriver;
+        protected MyWebDriver myWebDriver;
 
 
-        public Page(IWebDriver webDriver)
+        public Page(MyWebDriver myWebDriver)
         {
-            this.webDriver = webDriver;
+            this.myWebDriver = myWebDriver;
 
         }
 
         public abstract void IsPageProperlyLoaded();
 
-        protected IWebElement FindElement(By locator)
-        {
-            return webDriver.FindElement(locator);
-        }
-
-        protected void ClickOnElement(By locator)
-        {
-            IWebElement element = FindElement(locator);
-            element.Click();
-        }
-
-        protected void FillInTextBox(By locator, string text)
-        {
-            IWebElement element = FindElement(locator);
-            element.SendKeys(text);
-        }
+       
     }
 }

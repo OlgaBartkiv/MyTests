@@ -18,9 +18,10 @@ namespace MyObjects.Pages.Saucedemo
         private readonly By btnLogin = By.XPath("//input[contains(@id,'login-button')]");
         private readonly By lbLogo = By.XPath("//div[contains(@class,'logo')]");
 
-        public LoginPage(IWebDriver webDriver) : base(webDriver)
+        public LoginPage(MyWebDriver myWebDriver) : base(myWebDriver)
         {
-            this.webDriver = webDriver;
+            this.myWebDriver = myWebDriver;
+            Logger.Info($"Opening 'Login' page: {PageUrl}");
 
         }
         public void WaitForPageToLoad(WebDriverWait wait)
@@ -32,8 +33,8 @@ namespace MyObjects.Pages.Saucedemo
         {
             try
             {
-                FindElement(lbLogo);
-                FindElement(btnLogin);
+                myWebDriver.FindElement(lbLogo);
+                myWebDriver.FindElement(btnLogin);
             }
             catch (NoSuchElementException)
             {
@@ -43,21 +44,22 @@ namespace MyObjects.Pages.Saucedemo
 
         public void SetUsername(string username)
         {
-            FillInTextBox(txtUsername, username);
+            myWebDriver.FillInTextBox(txtUsername, username);
         }
         public void SetPassword(string password)
         {
-            FillInTextBox(txtPassword, password);
+            myWebDriver.FillInTextBox(txtPassword, password);
         }
         public void ClickLogin()
         {
-            ClickOnElement(btnLogin);
+            myWebDriver.ClickOnElement(btnLogin);
         }
         public void Login(string username, string password)
         {
-            FillInTextBox(txtUsername, username);
-            FillInTextBox(txtPassword, password);
-            ClickOnElement(btnLogin);
+            myWebDriver.FillInTextBox(txtUsername, username);
+            myWebDriver.FillInTextBox(txtPassword, password);
+            myWebDriver.ClickOnElement(btnLogin);
+            myWebDriver.LogScreenshot("After credentials submission...");
         }
 
     }

@@ -1,5 +1,6 @@
 ﻿using MyObjects.Helpers;
 using MyObjects.Pages.Saucedemo;
+using MyTests.Tests;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -12,52 +13,36 @@ using System.Threading.Tasks;
 
 namespace MyTests
 {
-    public class SaucedemoTests
+    public class SaucedemoTests : TestBase
     {
-        protected IWebDriver webDriver;
-        WebDriverWait wait;
-
-        [OneTimeSetUp]
-        public void StartChrome()
-        {
-            var testDirectory = TestContext.CurrentContext.TestDirectory;
-            webDriver = new ChromeDriver(testDirectory + @"\chromedriver.exe");
-            wait = new WebDriverWait(webDriver, new TimeSpan(0, 0, 5));
-        }
-
         [Test]
         public void AddItemToCart()
         {
-            webDriver.Url = Url.saucedemoUrl;
-            LoginPage loginPage = new LoginPage(webDriver);
+            myWebDriver.Url = Url.saucedemoUrl;
+            LoginPage loginPage = new LoginPage(myWebDriver);
             //loginPage.WaitForPageToLoad(wait);
             loginPage.IsPageProperlyLoaded();
             loginPage.Login("standard_user", "secret_sauce");
-            ProductsPage productsPage = new ProductsPage(webDriver);
+            ProductsPage productsPage = new ProductsPage(myWebDriver);
             //productsPage.WaitForPageToLoad(wait);
             productsPage.IsPageProperlyLoaded();
             productsPage.AddBackpackToCart();
             productsPage.GoToCart();
-            CartPage cartPage = new CartPage(webDriver);
+            CartPage cartPage = new CartPage(myWebDriver);
             //cartPage.WaitForPageToLoad(wait);
             cartPage.IsPageProperlyLoaded();
             cartPage.RemoveBackpackFromCart();
             cartPage.ClickContinue();
-            productsPage = new ProductsPage(webDriver);
+            productsPage = new ProductsPage(myWebDriver);
             //productsPage.WaitForPageToLoad(wait);
             productsPage.IsPageProperlyLoaded();
             productsPage.AddTshirtToCart();
             productsPage.GoToCart();
-            cartPage = new CartPage(webDriver);
+            cartPage = new CartPage(myWebDriver);
             //cartPage.WaitForPageToLoad(wait);
             cartPage.IsPageProperlyLoaded();
             cartPage.ClickCheckout();
-        }
-
-        [OneTimeTearDown]
-        public void CloseTest()
-        {
-            webDriver.Close();
+            
         }
     }
 }
