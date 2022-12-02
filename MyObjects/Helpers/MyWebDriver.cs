@@ -13,6 +13,7 @@ namespace MyObjects.Helpers
     public class MyWebDriver : IWebDriver
     {
         public IWebDriver webDriver;
+        public string StatusMessage;
 
         public MyWebDriver(IWebDriver webDriver)
         {
@@ -82,6 +83,12 @@ namespace MyObjects.Helpers
             set { webDriver.Url = value; }
         }
 
+        public void GoTo(string url)
+        {
+            Logger.Info($"GOTO URL: '{url}'");
+            Url = url;
+        }
+
         public string Title => webDriver.Title;
 
         public string PageSource => webDriver.PageSource;
@@ -105,11 +112,120 @@ namespace MyObjects.Helpers
 
             if (status == TestStatus.Passed)
             {
-                Logger.Info($"Screenshot on Passed step: {description}");
+                Logger.Info($"Screenshot: {description}");
             }
             else
             {
-                Logger.Error($"Screenshot on Failed step: {description}");
+                Logger.Error($"Screenshot: {description}");
+            }
+        }
+
+        /// <summary>
+        /// Hard Assert: actual Url against expected
+        /// </summary>
+        /// <param name="urlExpected"></param>
+        public void AssertUrl(string urlExpected)
+        {
+            string urlActual = webDriver.Url;
+            bool isMatch = urlActual.Equals(urlExpected);
+            if (isMatch)
+            {
+                Logger.Info($"PASS: Actual URL: '{urlActual}' is equal to the Expected URL: '{urlExpected}'");
+            }
+            else
+            {
+                Logger.Error($"FAIL: Actual URL: '{urlActual}' is not equal to the Expected URL: '{urlExpected}'");
+                Assert.Fail();
+            }
+
+        }
+
+        /// <summary>
+        /// Hard Assert: verify element is present on page
+        /// </summary>
+        /// <param name="locator"></param>
+        public void AssertElementPresentOnPage(By locator)
+        {
+            IWebElement element = FindElement(locator);
+            if (element != null)
+            {
+                Logger.Info($"PASS: Expected object with locator: {locator} is present on page");
+
+            }
+            else
+            {
+                Logger.Error($"FAIL: Expected object with locator: {locator} is absent on page");
+                Assert.Fail();
+            }
+        }
+
+        /// <summary>
+        /// Assert: verify text is present on page
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="description"></param>
+        public void AssertTextPresentOnPage(string text, string description)
+        {
+            if (!VerifyTextPresentOnPage(text, description))
+            {
+                Assert.Fail();
+            }
+        }
+
+        /// <summary>
+        /// Soft Assert: verify text is present on page
+        /// </summary>
+        /// <param name="text"></param>
+        public bool VerifyTextPresentOnPage(string text, string description)
+        {
+            if (webDriver.PageSource.Contains(text))
+            {
+                StatusMessage = $"PASS: Text presence verification: {description} - Expected text: {text} is present on page";
+                Logger.Info(StatusMessage);
+                return true;
+            }
+            else
+            {
+                StatusMessage = $"FAIL: Text presence verification: {description} - Expected text: {text} is absent on page";
+                Logger.Error(StatusMessage);
+                return false;
+
+            }
+        }
+
+        /// <summary>
+        /// Assert: verify number of items on page against expected
+        /// </summary>
+        /// <param name="locator"></param>
+        /// <param name="expectedCount"></param>
+        public void AssertCountOfItemsOnPage(By locator, int expectedCount, string description)
+        {
+            if(!VerifyCountOfItemsOnPage(locator, expectedCount, description))
+            {
+                Assert.Fail();
+            }
+        }
+
+        /// <summary>
+        /// Soft Assert: verify number of items on page against expected
+        /// </summary>
+        /// <param name="locator"></param>
+        /// <param name="expectedCount"></param>
+        public bool VerifyCountOfItemsOnPage(By locator, int expectedCount, string description)
+        {
+            ReadOnlyCollection<IWebElement> list = FindElements(locator);
+            int itemsCount = list.Count;
+            if(itemsCount == expectedCount)
+            {
+                StatusMessage = $"PASS: Count of items verification: {description} - expected count {expectedCount} is the same as actual count";
+                Logger.Info(StatusMessage);
+                return true;
+            }
+            else
+            {
+                StatusMessage = $"FAIL: Count of items verification: {description} - expected count {expectedCount} is not the same as actual count";
+                Logger.Error(StatusMessage);
+                return false;
             }
         }
     }

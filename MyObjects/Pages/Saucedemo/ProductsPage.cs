@@ -17,6 +17,8 @@ namespace MyObjects.Pages.Saucedemo
         private readonly By btnAddTshirt = By.XPath("//button[contains(@id,'add-to-cart-sauce-labs-bolt-t-shirt')]");
         private readonly By hlShoppingCart = By.CssSelector("div[id='shopping_cart_container'] a[class*='shopping_cart_link']");
         private readonly By lbLogo = By.XPath("//div[contains(@class,'logo')]");
+        private readonly By btnRemoveBackpack = By.XPath("//button[contains(@id,'remove-sauce-labs-backpack')]");
+        private readonly By lbProductItem = By.XPath("//div[@class='inventory_item_name']");
 
 
         public ProductsPage(MyWebDriver myWebDriver) : base(myWebDriver)
@@ -24,6 +26,7 @@ namespace MyObjects.Pages.Saucedemo
             this.webDriver = webDriver;
             this.myWebDriver = myWebDriver;
             Logger.Info($"Opening 'Products' page: {PageUrl}");
+            myWebDriver.AssertUrl(PageUrl);
 
         }
         public void WaitForPageToLoad(WebDriverWait wait)
@@ -36,6 +39,7 @@ namespace MyObjects.Pages.Saucedemo
             {
                 myWebDriver.FindElement(lbLogo);
                 myWebDriver.FindElement(hlShoppingCart);
+                myWebDriver.AssertCountOfItemsOnPage(lbProductItem, 6, "Products available in catalog");
             }
             catch (NoSuchElementException)
             {
@@ -46,6 +50,7 @@ namespace MyObjects.Pages.Saucedemo
         {
             myWebDriver.ClickOnElement(btnAddBackpack);
             Logger.Info("Backpack is added to cart");
+            myWebDriver.AssertElementPresentOnPage(btnRemoveBackpack);
         }
         public void AddTshirtToCart()
         {

@@ -22,6 +22,7 @@ namespace MyObjects.Pages.Saucedemo
         {
             this.myWebDriver = myWebDriver;
             Logger.Info($"Opening 'Login' page: {PageUrl}");
+            myWebDriver.AssertUrl(PageUrl);
 
         }
         public void WaitForPageToLoad(WebDriverWait wait)
