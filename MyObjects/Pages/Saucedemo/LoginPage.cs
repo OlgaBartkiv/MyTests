@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using MyObjects.Helpers;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System.Collections.Generic;
@@ -10,12 +11,12 @@ namespace MyObjects.Pages.Saucedemo
 {
     public class LoginPage : Page
     {
-        IWebDriver webDriver;
+        public static readonly string PageUrl = Url.saucedemoUrl;
 
-        public readonly By txtUsername = By.XPath("//input[contains(@id,'user-name')]");
-        public readonly By txtPassword = By.XPath("//input[contains(@id,'password')]");
-        public readonly By btnLogin = By.XPath("//input[contains(@id,'login-button')]");
-        public readonly By lbLogo = By.XPath("//div[contains(@class,'logo')]");
+        private readonly By txtUsername = By.XPath("//input[contains(@id,'user-name')]");
+        private readonly By txtPassword = By.XPath("//input[contains(@id,'password')]");
+        private readonly By btnLogin = By.XPath("//input[contains(@id,'login-button')]");
+        private readonly By lbLogo = By.XPath("//div[contains(@class,'logo')]");
 
         public LoginPage(IWebDriver webDriver) : base(webDriver)
         {

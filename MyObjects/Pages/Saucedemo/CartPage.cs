@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using MyObjects.Helpers;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System.Collections.Generic;
@@ -10,12 +11,12 @@ namespace MyObjects.Pages.Saucedemo
 {
     public class CartPage : Page
     {
-        IWebDriver webDriver;
+        public static readonly string PageUrl = Url.saucedemoUrl + "cart.html";
 
-        public readonly By btnRemoveBackpack = By.XPath("//button[contains(@id,'remove-sauce-labs-backpack')]");
-        public readonly By btnCheckout = By.XPath("//button[contains(@id,'checkout')]");
-        public readonly By btnContinue = By.XPath("//button[contains(@id,'continue-shopping')]");
-        public readonly By lbLogo = By.XPath("//div[contains(@class,'logo')]");
+        private readonly By btnRemoveBackpack = By.XPath("//button[contains(@id,'remove-sauce-labs-backpack')]");
+        private readonly By btnCheckout = By.XPath("//button[contains(@id,'checkout')]");
+        private readonly By btnContinue = By.XPath("//button[contains(@id,'continue-shopping')]");
+        private readonly By lbLogo = By.XPath("//div[contains(@class,'logo')]");
 
 
         public CartPage(IWebDriver webDriver) : base(webDriver)

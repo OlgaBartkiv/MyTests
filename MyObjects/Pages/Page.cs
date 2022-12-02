@@ -5,7 +5,7 @@ namespace MyObjects.Pages
 {
     public abstract class Page
     {
-        IWebDriver webDriver;
+        protected IWebDriver webDriver;
 
 
         public Page(IWebDriver webDriver)
@@ -16,18 +16,18 @@ namespace MyObjects.Pages
 
         public abstract void IsPageProperlyLoaded();
 
-        public IWebElement FindElement(By locator)
+        protected IWebElement FindElement(By locator)
         {
             return webDriver.FindElement(locator);
         }
 
-        public void ClickOnElement(By locator)
+        protected void ClickOnElement(By locator)
         {
             IWebElement element = FindElement(locator);
             element.Click();
         }
 
-        public void FillInTextBox(By locator, string text)
+        protected void FillInTextBox(By locator, string text)
         {
             IWebElement element = FindElement(locator);
             element.SendKeys(text);
