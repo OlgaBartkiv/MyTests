@@ -43,6 +43,7 @@ namespace MyObjects.Pages.Saucedemo
         public void RemoveBackpackFromCart()
         {
             ClickOnElement(btnRemoveBackpack);
+            Logger.Info("Backpack is removed from cart");
         }
         public void ClickContinue()
         {

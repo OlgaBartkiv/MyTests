@@ -21,7 +21,7 @@ namespace MyObjects.Pages.Saucedemo
         public LoginPage(IWebDriver webDriver) : base(webDriver)
         {
             this.webDriver = webDriver;
-       
+
         }
         public void WaitForPageToLoad(WebDriverWait wait)
         {
