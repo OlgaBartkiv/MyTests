@@ -18,17 +18,19 @@ namespace MyTests
         [Test]
         public void AddItemToCart()
         {
-            myWebDriver.Url = Url.saucedemoUrl;
+            myWebDriver.GoTo(Url.saucedemoUrl);
             LoginPage loginPage = new LoginPage(myWebDriver);
             loginPage.IsPageProperlyLoaded();
             loginPage.Login("standard_user", "secret_sauce");
             ProductsPage productsPage = new ProductsPage(myWebDriver);
-            myWebDriver.AssertTextPresentOnPage("Products");
+            //productsPage.WaitForPageToLoad(wait);
+            myWebDriver.AssertTextPresentOnPage("Products", "Page title on Products page");
             productsPage.IsPageProperlyLoaded();
             productsPage.AddBackpackToCart();
             productsPage.GoToCart();
             CartPage cartPage = new CartPage(myWebDriver);
-            myWebDriver.AssertTextPresentOnPage("Your Cart");
+            //cartPage.WaitForPageToLoad(wait);
+            myWebDriver.AssertTextPresentOnPage("Your Cart", "Page title on Cart page");
             cartPage.IsPageProperlyLoaded();
             cartPage.RemoveBackpackFromCart();
             cartPage.ClickContinue();

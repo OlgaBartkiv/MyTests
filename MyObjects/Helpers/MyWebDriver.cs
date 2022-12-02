@@ -13,6 +13,7 @@ namespace MyObjects.Helpers
     public class MyWebDriver : IWebDriver
     {
         public IWebDriver webDriver;
+        public string StatusMessage;
 
         public MyWebDriver(IWebDriver webDriver)
         {
@@ -82,6 +83,12 @@ namespace MyObjects.Helpers
             set { webDriver.Url = value; }
         }
 
+        public void GoTo(string url)
+        {
+            Logger.Info($"GOTO URL: '{url}'");
+            Url = url;
+        }
+
         public string Title => webDriver.Title;
 
         public string PageSource => webDriver.PageSource;
@@ -99,10 +106,9 @@ namespace MyObjects.Helpers
         {
             string fileName = "snapshot" + "_" + DateTime.Now.ToString("dd_MMMM_hh_mm_ss_tt") + ".png";
 
-
             ITakesScreenshot screenshotHandler = webDriver as ITakesScreenshot;
             Screenshot screenshot = screenshotHandler.GetScreenshot();
-            screenshot.SaveAsFile(@"C:\Users\obartkiv\source\MyTests\MyObjects\bin\Debug\Logs" + fileName, ScreenshotImageFormat.Png);
+            screenshot.SaveAsFile(TestContext.CurrentContext.TestDirectory + @"\Logs\" + fileName, ScreenshotImageFormat.Png);
 
             if (status == TestStatus.Passed)
             {
@@ -154,19 +160,49 @@ namespace MyObjects.Helpers
         }
 
         /// <summary>
+        /// Assert: verify text is present on page
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="description"></param>
+        public void AssertTextPresentOnPage(string text, string description)
+        {
+            if (!VerifyTextPresentOnPage(text, description))
+            {
+                Assert.Fail();
+            }
+        }
+
+        /// <summary>
         /// Soft Assert: verify text is present on page
         /// </summary>
         /// <param name="text"></param>
-        public void AssertTextPresentOnPage(string text)
+        public bool VerifyTextPresentOnPage(string text, string description)
         {
             if (webDriver.PageSource.Contains(text))
             {
-                Logger.Info($"PASS: Expected text: {text} is present on page");
+                StatusMessage = $"PASS: Text presence verification: {description} - Expected text: {text} is present on page";
+                Logger.Info(StatusMessage);
+                return true;
             }
             else
             {
-                Logger.Error($"FAIL: Expected text: {text} is absent on page");
+                StatusMessage = $"FAIL: Text presence verification: {description} - Expected text: {text} is absent on page";
+                Logger.Error(StatusMessage);
+                return false;
 
+            }
+        }
+
+        /// <summary>
+        /// Assert: verify number of items on page against expected
+        /// </summary>
+        /// <param name="locator"></param>
+        /// <param name="expectedCount"></param>
+        public void AssertCountOfItemsOnPage(By locator, int expectedCount, string description)
+        {
+            if(!VerifyCountOfItemsOnPage(locator, expectedCount, description))
+            {
+                Assert.Fail();
             }
         }
 
@@ -175,17 +211,21 @@ namespace MyObjects.Helpers
         /// </summary>
         /// <param name="locator"></param>
         /// <param name="expectedCount"></param>
-        public void AssertCountOfItemsOnPage(By locator, int expectedCount)
+        public bool VerifyCountOfItemsOnPage(By locator, int expectedCount, string description)
         {
             ReadOnlyCollection<IWebElement> list = FindElements(locator);
             int itemsCount = list.Count;
             if(itemsCount == expectedCount)
             {
-                Logger.Info($"PASS: Actual count of items on page is {expectedCount}");
+                StatusMessage = $"PASS: Count of items verification: {description} - expected count {expectedCount} is the same as actual count";
+                Logger.Info(StatusMessage);
+                return true;
             }
             else
             {
-                Logger.Info($"FAIL: Actual count of items on page is not equal to {expectedCount}");
+                StatusMessage = $"FAIL: Count of items verification: {description} - expected count {expectedCount} is not the same as actual count";
+                Logger.Error(StatusMessage);
+                return false;
             }
         }
     }

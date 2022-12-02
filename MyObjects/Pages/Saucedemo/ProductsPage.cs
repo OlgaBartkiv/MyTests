@@ -36,7 +36,7 @@ namespace MyObjects.Pages.Saucedemo
             {
                 myWebDriver.FindElement(lbLogo);
                 myWebDriver.FindElement(hlShoppingCart);
-                myWebDriver.AssertCountOfItemsOnPage(lbProductItem, 6);
+                myWebDriver.AssertCountOfItemsOnPage(lbProductItem, 6, "Products available in catalog");
             }
             catch (NoSuchElementException)
             {
