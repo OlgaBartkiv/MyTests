@@ -12,7 +12,8 @@ namespace MyTests.Tests
     public class PageFactoryTests : TestBase
     {
 
-        [Test]
+        [Test, Retry(2), Description("This test is using Page Factory class")]
+        [Ignore("Ignore this test as we are using POM not Page Factory")]
         public void LoginAndAddItemToCart()
         {
             myWebDriver.GoTo(Url.saucedemoUrl);

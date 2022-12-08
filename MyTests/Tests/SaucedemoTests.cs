@@ -15,7 +15,7 @@ namespace MyTests
 {
     public class SaucedemoTests : TestBase
     {
-        [Test]
+        [Test, Retry(2), Description("This test is using POM design approach")]
         public void AddItemToCart()
         {
             myWebDriver.GoTo(Url.saucedemoUrl);
@@ -44,7 +44,7 @@ namespace MyTests
             
         }
 
-        [Test]
+        [Test, Retry(2), Description("This test verifies failure in logging when invalid password is provided")]
         public void FailedLoginInvalidPassword()
         {
             myWebDriver.Url = Url.saucedemoUrl;
