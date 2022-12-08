@@ -44,14 +44,5 @@ namespace MyTests
             
         }
 
-        [Test, Retry(2), Description("This test verifies failure in logging when invalid password is provided")]
-        public void FailedLoginInvalidPassword()
-        {
-            myWebDriver.Url = Url.saucedemoUrl;
-            LoginPage loginPage = new LoginPage(myWebDriver);
-            loginPage.IsPageProperlyLoaded();
-            loginPage.Login("standard_user", "secretsauce");
-            ProductsPage productsPage = new ProductsPage(myWebDriver);
-        }
     }
 }
