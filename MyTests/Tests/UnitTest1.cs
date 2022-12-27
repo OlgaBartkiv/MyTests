@@ -1,3 +1,4 @@
+using MyObjects.Helpers;
 using MyTests.Tests;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -11,7 +12,7 @@ namespace MyTests
         [Test]
         public void Test1()
         {
-            myWebDriver.Url = "https://www.google.com/";
+            myWebDriver.GoTo(GlobalVariables.Google);
             Assert.Pass();
         }
 

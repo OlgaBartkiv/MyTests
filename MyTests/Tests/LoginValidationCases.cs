@@ -22,7 +22,7 @@ namespace MyTests.Tests
         public void LoginValidation(string username, string password)
         {
             Thread.Sleep(2000);
-            myWebDriver.GoTo(Url.saucedemoUrl);
+            myWebDriver.GoTo(GlobalVariables.Saucedemo);
             LoginPage loginPage = new LoginPage(myWebDriver);
             loginPage.IsPageProperlyLoaded();
             loginPage.SetUsername(username);

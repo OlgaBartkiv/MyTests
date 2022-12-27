@@ -14,7 +14,7 @@ namespace MyTests.Tests
         [Test]
         public void HandleSimpleAlert()
         {
-            myWebDriver.GoTo(Url.guru99AlertUrl);
+            myWebDriver.GoTo(GlobalVariables.GuruAlert);
             myWebDriver.Manage().Window.Maximize();
             myWebDriver.FindElement(By.Name("cusid")).SendKeys("53920");
             myWebDriver.FindElement(By.Name("submit")).Submit();
@@ -25,7 +25,7 @@ namespace MyTests.Tests
         [Test]
         public void HandlePopupWindow()
         {
-            myWebDriver.GoTo(Url.guru99PopupUrl);
+            myWebDriver.GoTo(GlobalVariables.GuruPopup);
             myWebDriver.Manage().Window.Maximize();
             myWebDriver.FindElement(By.XPath("//*[contains(@href,'popup.php')]")).Click();
             string mainWindow = myWebDriver.CurrentWindowHandle;
