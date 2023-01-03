@@ -18,7 +18,7 @@ namespace MyTests
         [Test, Retry(2), Description("This test is using POM design approach")]
         public void AddItemToCart()
         {
-            myWebDriver.GoTo(Url.saucedemoUrl);
+            myWebDriver.GoTo(Url.SauceDemoUrl);
             LoginPage loginPage = new LoginPage(myWebDriver);
             loginPage.IsPageProperlyLoaded();
             loginPage.Login("standard_user", "secret_sauce");

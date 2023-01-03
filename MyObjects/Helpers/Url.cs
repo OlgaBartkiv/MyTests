@@ -6,11 +6,18 @@ using System.Threading.Tasks;
 
 namespace MyObjects.Helpers
 {
+    public enum Urls
+    {
+        SauceDemo,
+        GuruAlert,
+        GuruPopup
+    }
+
     public static class Url
     {
-        public const string saucedemoUrl = "https://www.saucedemo.com/";
-        public const string guru99AlertUrl = "http://demo.guru99.com/test/delete_customer.php";
-        public const string guru99PopupUrl = "http://demo.guru99.com/popup.php";
+        public static string SauceDemoUrl = MyAppSettings.GetConfig(Section.Urls, $"{Urls.SauceDemo}");
+        public static string Guru99AlertUrl = MyAppSettings.GetConfig(Section.Urls, $"{Urls.GuruAlert}");
+        public static string Guru99PopupUrl = MyAppSettings.GetConfig(Section.Urls, $"{Urls.GuruPopup}");
 
     }
 }
