@@ -16,7 +16,7 @@ namespace MyTests.Tests
         [Ignore("Ignore this test as we are using POM not Page Factory")]
         public void LoginAndAddItemToCart()
         {
-            myWebDriver.GoTo(Url.saucedemoUrl);
+            myWebDriver.GoTo(Url.SauceDemoUrl);
             var loginPage = new LoginPagePO(myWebDriver);
             loginPage.UserName.SendKeys("standard_user");
             loginPage.Password.SendKeys("secret_sauce");

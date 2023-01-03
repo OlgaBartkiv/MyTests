@@ -11,7 +11,7 @@ namespace MyObjects.Pages.Saucedemo
 {
     public class ProductsPage : Page
     {
-        public static readonly string PageUrl = Url.saucedemoUrl + "inventory.html";
+        public static readonly string PageUrl = Url.SauceDemoUrl + "inventory.html";
 
         private readonly By btnAddBackpack = By.XPath("//button[contains(@id,'add-to-cart-sauce-labs-backpack')]");
         private readonly By btnAddTshirt = By.XPath("//button[contains(@id,'add-to-cart-sauce-labs-bolt-t-shirt')]");

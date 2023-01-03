@@ -11,7 +11,7 @@ namespace MyObjects.Pages.Saucedemo
 {
     public class LoginPage : Page
     {
-        public static readonly string PageUrl = Url.saucedemoUrl;
+        public static readonly string PageUrl = Url.SauceDemoUrl;
 
         private readonly By txtUsername = By.XPath("//input[contains(@id,'user-name')]");
         private readonly By txtPassword = By.XPath("//input[contains(@id,'password')]");
